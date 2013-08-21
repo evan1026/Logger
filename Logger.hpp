@@ -14,6 +14,12 @@ struct Logger {
     void log(int type, std::string message, bool color);
     void log(int type, std::string message);
     void log(std::string message);
+    
+    void logNoEndl(int type, std::string message, bool color);
+    void logNoEndl(int type, std::string message);
+    void logNoEndl(std::string message);
+    
+    void pause();
 };
 
 #endif

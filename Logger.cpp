@@ -3,6 +3,19 @@
 Logger::Logger(){}
 
 void Logger::log(int type, std::string message, bool color){
+    Logger::logNoEndl(type, message, color);
+    std::cout << std::endl;
+}
+
+void Logger::log(int type, std::string message){
+    Logger::log(type, message, false);
+}
+
+void Logger::log(std::string message){
+    Logger::log(Logger::LOG_INFO, message);
+}
+
+void Logger::logNoEndl(int type, std::string message, bool color){
     std::string output = "";
     switch (type) {
         case Logger::LOG_INFO:
@@ -20,13 +33,19 @@ void Logger::log(int type, std::string message, bool color){
     }
     output += message + (color ? "\e[m" : "");
 
-    std::cout << output << std::endl;
+    std::cout << output;
+    std::cout.flush();
 }
 
-void Logger::log(int type, std::string message){
-    Logger::log(type, message, false);
+void Logger::logNoEndl(int type, std::string message){
+    Logger::logNoEndl(type, message, false);
 }
 
-void Logger::log(std::string message){
-    Logger::log(Logger::LOG_INFO, message);
+void Logger::logNoEndl(std::string message){
+    Logger::logNoEndl(Logger::LOG_INFO, message);
+}
+
+void Logger::pause(){
+    Logger::logNoEndl("Press enter to continue...");
+    std::cin.get();
 }
