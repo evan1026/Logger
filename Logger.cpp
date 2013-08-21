@@ -1,9 +1,5 @@
 #include "Logger.hpp"
 
-const int Logger::LOG_INFO    = 0;
-const int Logger::LOG_WARNING = 1;
-const int Logger::LOG_ERROR   = 2;
-
 void Logger::log(int type, std::string message, bool color){
     switch (type) {
         case Logger::LOG_INFO:
@@ -20,6 +16,7 @@ void Logger::log(int type, std::string message, bool color){
             break;
     }
     std::cout << message << (color ? "\e[m" : "") << std::endl;
+    prevLength = message.length() + (color ? 5 : 1);
 }
 
 void Logger::log(int type, std::string message){
@@ -28,4 +25,25 @@ void Logger::log(int type, std::string message){
 
 void Logger::log(std::string message){
     Logger::log(Logger::LOG_INFO, message);
+}
+
+void Logger::logrw(int type, std::string message, bool color){
+    Logger::eraseLast();
+    Logger::log(type, message, color);
+}
+
+void Logger::logrw(int type, std::string message){
+    Logger::logrw(type, message, false);
+}
+
+void Logger::logrw(std::string message){
+    Logger::logrw(Logger::LOG_INFO, message);
+}
+
+void Logger::eraseLast(){
+    for (int i = 0; i < Logger::prevLength; i++){
+        std::cout << "\b";
+    }
+    std::cout.flush();
+    prevLength = 0;
 }
