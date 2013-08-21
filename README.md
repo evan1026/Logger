@@ -9,19 +9,21 @@ Usage
 =====
 
 Just declare a logger:
+
     Logger logger;
+    
 And you have access to its functions:
+
     void log(int type, std::string message, bool color);
     void log(int type, std::string message);
     void log(std::string message);
-    
     void logNoEndl(int type, std::string message, bool color);
     void logNoEndl(int type, std::string message);
     void logNoEndl(std::string message);
-    
     void pause();
 
 The string is the message you want to log, the type is one of three types of output:
+
     Logger::LOG_INFO
     Logger::LOG_WARNING
     Logger::LOG_ERROR
