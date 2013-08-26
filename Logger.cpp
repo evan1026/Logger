@@ -46,6 +46,10 @@ void Logger::logNoEndl(std::string message){
 }
 
 void Logger::pause(){
-    Logger::logNoEndl("Press enter to continue...");
+    Logger::pause("Press enter to continue...");
+}
+
+void Logger::pause(std::string message){
+    Logger::logNoEndl(message);
     std::cin.get();
 }

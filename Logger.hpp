@@ -20,6 +20,7 @@ struct Logger {
     void logNoEndl(std::string message);
     
     void pause();
+    void pause(std::string message);
 };
 
 #endif
