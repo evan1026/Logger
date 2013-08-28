@@ -3,8 +3,23 @@ Logger
 
 A simple logging tool written in c++.
 
-//Just include the Logger.cpp file.
-I'm working on making a library you can install with cmake, just give me some time.
+Installation is easy:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make && sudo make install
+    
+That will install the necessary files. In order to use, just link up the header and library (found /usr/local/include/Logger and /usr/local/lib, respectively).
+
+For CMake, you just need to add the module path:
+
+    set(CMAKE_MODULE_PATH "/usr/local/share/Logger/;${CMAKE_MODULE_PATH}")
+
+then add the library:
+
+    find_package(Logger REQUIRED)
+    target_link_libraries(${EXECUTABLE_NAME} Logger)
 
 Usage
 =====
@@ -22,7 +37,8 @@ And you have access to its functions:
     void logNoEndl(int type, std::string message);
     void logNoEndl(std::string message);
     void pause();
-
+    void pause(std::string message);
+    
 The string is the message you want to log, the type is one of three types of output:
 
     Logger::LOG_INFO
