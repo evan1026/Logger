@@ -3,7 +3,8 @@ Logger
 
 A simple logging tool written in c++.
 
-Just include the Logger.cpp file.
+//Just include the Logger.cpp file.
+I'm working on making a library you can install with cmake, just give me some time.
 
 Usage
 =====
