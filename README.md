@@ -38,6 +38,13 @@ And you have access to its functions:
     void logNoEndl(std::string message);
     void pause();
     void pause(std::string message);
+    bool clearLine();
+    bool logrw(int type, std::string message, bool color);
+    bool logrw(int type, std::string message);
+    bool logrw(std::string message);
+    bool logrwNoEndl(int type, std::string message, bool color);
+    bool logrwNoEndl(int type, std::string message);
+    bool logrwNoEndl(std::string message);
     
 The string is the message you want to log, the type is one of three types of output:
 
@@ -50,6 +57,8 @@ The default type when not given is `LOG_INFO`.
 When `color` is true, Linux style color codes are used. `LOG_INFO` is white, `LOG_WARNING` is yellow, and `LOG_ERROR` is red.
 It defaults to false.
 
-`logNoEndl` is the same as `log`, except it does not add a newline (`\n`) at the end of the line. I have plans to allow this to have rewritable lines, but I'll get to that later.
+The commands ending in `NoEndl` do not add a newline (`\n`) at the end of the line. This allows for the current line to be rewritten using the `rw` varieties. The line can also be cleared with `clearLine()`.
 
-`pause` outputs `Press enter to continue...` and then waits for the user to press enter before returning and allowing the program to continue.
+Where applicable, functions returning a boolean return whether or not the command was successful. An error indicates that the command could not be carried out (for instance, when clearing/rewriting a line that had a newline (i.e. clearing/rewriting even though previous command was not a `NoEndl` (p.s. nested parentheses ftw))).
+
+`pause` outputs `Press enter to continue...` (unless another message is supplied) and then waits for the user to press enter before returning and allowing the program to continue.
