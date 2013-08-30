@@ -45,6 +45,8 @@ And you have access to its functions:
     bool logrwNoEndl(int type, std::string message, bool color);
     bool logrwNoEndl(int type, std::string message);
     bool logrwNoEndl(std::string message);
+    void continueln(std::string message);
+    void continuelnNoEndl(std::string message);
     
 The string is the message you want to log, the type is one of three types of output:
 
@@ -62,3 +64,5 @@ The commands ending in `NoEndl` do not add a newline (`\n`) at the end of the li
 Where applicable, functions returning a boolean return whether or not the command was successful. An error indicates that the command could not be carried out (for instance, when clearing/rewriting a line that had a newline (i.e. clearing/rewriting even though previous command was not a `NoEndl` (p.s. nested parentheses ftw))).
 
 `pause` outputs `Press enter to continue...` (unless another message is supplied) and then waits for the user to press enter before returning and allowing the program to continue.
+
+The `continueln` commands continue a line, meaning they output to stdout without the type tag. This can be exploited to have clean outputs without the tags or to end a line that has been started but not finished. If you are using this library, please use these functions for that purpose and not cout, as they also take care of some behind-the-scenes work that keeps everything working smoothly.

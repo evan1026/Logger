@@ -33,10 +33,16 @@ struct Logger {
     bool logrwNoEndl(int type, std::string message);
     bool logrwNoEndl(std::string message);
 
+    void continueln(std::string message);
+    void continuelnNoEndl(std::string message);
+
     private:
         bool canRewrite;
         bool rewriting;
         std::size_t lastLength;
+        std::string currentLine;
+
+        void finishLine();
 };
 
 #endif

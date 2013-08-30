@@ -7,8 +7,9 @@ Logger::Logger(){
 }
 
 void Logger::log(int type, std::string message, bool color){
+    
     this->logNoEndl(type, message, color);
-    std::cout << std::endl;
+    this->finishLine();
 
     canRewrite = false;
 }
@@ -22,6 +23,8 @@ void Logger::log(std::string message){
 }
 
 void Logger::logNoEndl(int type, std::string message, bool color){
+    if (canRewrite) this->finishLine();
+
     std::string output = "";
     std::size_t thisLength = message.length();
     switch (type) {
@@ -41,7 +44,8 @@ void Logger::logNoEndl(int type, std::string message, bool color){
             this->log(LOG_ERROR, "Log type not found");
             break;
     }
-    output += message + (color ? "\e[m" : "");
+
+    output += message;
 
     if (rewriting && thisLength < lastLength){
         for (int i = 0; i < lastLength - thisLength; i++){
@@ -51,6 +55,8 @@ void Logger::logNoEndl(int type, std::string message, bool color){
     }
 
     lastLength = thisLength;
+
+    currentLine = output;
 
     std::cout << output;
     std::cout.flush();
@@ -122,4 +128,21 @@ bool Logger::logrwNoEndl(int type, std::string message){
 
 bool Logger::logrwNoEndl(std::string message){
     return this->logrwNoEndl(Logger::LOG_INFO, message);
+}
+
+void Logger::continueln(std::string message){
+    std::cout << message;
+    this->finishLine();
+    canRewrite = false;
+}
+
+void Logger::continuelnNoEndl(std::string message){
+    std::cout << message;
+    currentLine += message;
+}
+
+void Logger::finishLine(){
+    bool color = (currentLine.find("\e") != std::string::npos);
+    std::cout << (color ? "\e[m" : "") << std::endl;
+    currentLine = "";
 }
