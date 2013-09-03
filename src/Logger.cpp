@@ -146,3 +146,135 @@ void Logger::finishLine(){
     std::cout << (color ? "\e[m" : "") << std::endl;
     currentLine = "";
 }
+
+std::string operator+(bool a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, bool b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(short a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, short b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(unsigned short a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, unsigned short b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(int a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, int b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(unsigned int a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, unsigned int b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(long a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, long b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(unsigned long a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, unsigned long b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(long long a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, unsigned long long b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(float a, std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, float b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(double a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, double b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(long double a, const std::string& b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}
+
+std::string operator+(const std::string& a, long double b){
+    std::stringstream ss;
+    ss << a << b;
+    return ss.str();
+}

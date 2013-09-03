@@ -47,7 +47,47 @@ And you have access to its functions:
     bool logrwNoEndl(std::string message);
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
-    
+
+As well as the operators it defines:
+
+    std::string operator+(bool a, const std::string& b);
+    std::string operator+(const std::string& a, bool b);
+    std::string operator+(short a, const std::string& b);
+    std::string operator+(const std::string& a, short b);
+    std::string operator+(unsigned short a, const std::string& b);
+    std::string operator+(const std::string& a, unsigned short b);
+    std::string operator+(int a, const std::string& b);
+    std::string operator+(const std::string& a, int b);
+    std::string operator+(unsigned int a, const std::string& b);
+    std::string operator+(const std::string& a, unsigned int b);
+    std::string operator+(long a, const std::string& b);
+    std::string operator+(const std::string& a, long b);
+    std::string operator+(unsigned long a, const std::string& b);
+    std::string operator+(const std::string& a, unsigned long b);
+    std::string operator+(long long a, const std::string& b);
+    std::string operator+(const std::string& a, long long b);
+    std::string operator+(unsigned long long a, const std::string& b);
+    std::string operator+(const std::string& a, unsigned long long b);
+    std::string operator+(float a, const std::string& b);
+    std::string operator+(const std::string& a, float b);
+    std::string operator+(double a, const std::string& b);
+    std::string operator+(const std::string& a, double b);
+    std::string operator+(long double a, const std::string& b);
+    std::string operator+(const std::string& a, long double b);
+
+Note that since all of these take strings, the following code will not work as expected:
+
+    logger.log(5 + " is a number.")
+
+This is because the quoted text is of the type `char*`, not std::string, so rather than concatenating, it will advance the pointer by five and then output the remaining text
+after that (which ends up being " number."). For obvious reasons, I can't redefine this operator (although I may make a new one in the future if I can think of one that makes
+sense), so the best way to to what you want here is:
+
+    logger.log(5 + std::string(" is a number."));
+
+Explaination
+------------
+
 The string is the message you want to log, the type is one of three types of output:
 
     Logger::LOG_INFO
