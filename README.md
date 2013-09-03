@@ -48,7 +48,7 @@ And you have access to its functions:
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
 
-As well as the operators it defines:
+As well as the operators it defines (note that the operators are non-member functions):
 
     std::string operator+(bool a, const std::string& b);
     std::string operator+(const std::string& a, bool b);
@@ -79,8 +79,8 @@ Note that since all of these take strings, the following code will not work as e
 
     logger.log(5 + " is a number.")
 
-This is because the quoted text is of the type `char*`, not std::string, so rather than concatenating, it will advance the pointer by five and then output the remaining text
-after that (which ends up being " number."). For obvious reasons, I can't redefine this operator (although I may make a new one in the future if I can think of one that makes
+This is because the quoted text is of the type `char*`, `not std::string`, so rather than concatenating, it will advance the pointer by five and then output the remaining text
+after that (which ends up being `" number."`). For obvious reasons, I can't redefine this operator (although I may make a new one in the future if I can think of one that makes
 sense), so the best way to to what you want here is:
 
     logger.log(5 + std::string(" is a number."));
