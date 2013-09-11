@@ -53,7 +53,7 @@ which prints:
     
     5 is a number and 6 is too.
 
-Each of the functions that takes a message also has a variant that takes a variable number of parameters just like `makeString` (see [Example Usage](#exampleusage)).
+Each of the functions that takes a message also has a variant that takes a variable number of parameters just like `makeString` (see [Example Usage](#example-usage)).
 
 Explaination
 ------------
