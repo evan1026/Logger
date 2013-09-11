@@ -10,13 +10,11 @@ struct Logger {
     static const int LOG_WARNING = 1;
     static const int LOG_ERROR   = 2;
 
-    Logger();
+    Logger(bool _color);
     
-    void log(int type, std::string message, bool color);
     void log(int type, std::string message);
     void log(std::string message);
     
-    void logNoEndl(int type, std::string message, bool color);
     void logNoEndl(int type, std::string message);
     void logNoEndl(std::string message);
     
@@ -25,60 +23,86 @@ struct Logger {
 
     bool clearLine();
 
-    bool logrw(int type, std::string message, bool color);
     bool logrw(int type, std::string message);
     bool logrw(std::string message);
 
-    bool logrwNoEndl(int type, std::string message, bool color);
     bool logrwNoEndl(int type, std::string message);
     bool logrwNoEndl(std::string message);
 
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
 
+    template<class T>
+    static std::string makeString(const T& thing){
+        std::stringstream ss;
+        ss << thing;
+        return ss.str();
+    }
+    template<class T, class... Ts>
+    static std::string makeString(const T& firstPart, Ts... otherParts){
+        std::stringstream ss;
+        ss << firstPart;
+        return ss.str() + makeString(otherParts...);
+    }
+    
+    template<class... Ts>
+    void log(int type, Ts... parts){
+        this->log(type, Logger::makeString(parts...));
+    }
+    template<class... Ts>
+    void log(Ts... parts){
+        this->log(Logger::makeString(parts...));
+    }
+    
+    template<class... Ts>
+    void logNoEndl(int type, Ts... parts){
+        this->logNoEndl(type, Logger::makeString(parts...));
+    }
+    template<class... Ts>
+    void logNoEndl(Ts... parts){
+        this->logNoEndl(Logger::makeString(parts...));
+    }
+
+    template<class... Ts>
+    void pause(Ts... parts){
+        this->pause(Logger::makeString(parts...));
+    }
+
+    template<class... Ts>
+    bool logrw(int type, Ts... parts){
+        this->logrw(type, Logger::makeString(parts...));
+    }
+    template<class... Ts>
+    bool logrw(Ts... parts){
+        this->logrw(Logger::makeString(parts...));
+    }
+
+    template<class... Ts>
+    bool logrwNoEndl(int type, Ts... parts){
+        this->logrwNoEndl(type, Logger::makeString(parts...));
+    }
+    template<class... Ts>
+    bool logrwNoEndl(Ts... parts){
+        this->logrwNoEndl(Logger::makeString(parts...));
+    }
+
+    template<class... Ts>
+    void continueln(Ts... parts){
+        this->continueln(Logger::makeString(parts...));
+    }
+    template<class... Ts>
+    void continuelnNoEndl(Ts... parts){
+        this->continuelnNoEndl(Logger::makeString(parts...));
+    }
+
     private:
         bool canRewrite;
         bool rewriting;
+        bool color;
         std::size_t lastLength;
         std::string currentLine;
 
         void finishLine();
 };
-
-std::string operator+(bool a, const std::string& b);
-std::string operator+(const std::string& a, bool b);
-
-std::string operator+(short a, const std::string& b);
-std::string operator+(const std::string& a, short b);
-
-std::string operator+(unsigned short a, const std::string& b);
-std::string operator+(const std::string& a, unsigned short b);
-
-std::string operator+(int a, const std::string& b);
-std::string operator+(const std::string& a, int b);
-
-std::string operator+(unsigned int a, const std::string& b);
-std::string operator+(const std::string& a, unsigned int b);
-
-std::string operator+(long a, const std::string& b);
-std::string operator+(const std::string& a, long b);
-
-std::string operator+(unsigned long a, const std::string& b);
-std::string operator+(const std::string& a, unsigned long b);
-
-std::string operator+(long long a, const std::string& b);
-std::string operator+(const std::string& a, long long b);
-
-std::string operator+(unsigned long long a, const std::string& b);
-std::string operator+(const std::string& a, unsigned long long b);
-
-std::string operator+(float a, const std::string& b);
-std::string operator+(const std::string& a, float b);
-
-std::string operator+(double a, const std::string& b);
-std::string operator+(const std::string& a, double b);
-
-std::string operator+(long double a, const std::string& b);
-std::string operator+(const std::string& a, long double b);
 
 #endif

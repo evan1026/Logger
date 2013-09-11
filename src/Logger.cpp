@@ -1,28 +1,25 @@
 #include "Logger.hpp"
 
-Logger::Logger(){
+Logger::Logger(bool _color){
     canRewrite = false;
     rewriting = false;
     lastLength = 0;
-}
-
-void Logger::log(int type, std::string message, bool color){
-    
-    this->logNoEndl(type, message, color);
-    this->finishLine();
-
-    canRewrite = false;
+    color = _color;
 }
 
 void Logger::log(int type, std::string message){
-    this->log(type, message, false);
+    
+    this->logNoEndl(type, message);
+    this->finishLine();
+
+    canRewrite = false;
 }
 
 void Logger::log(std::string message){
     this->log(Logger::LOG_INFO, message);
 }
 
-void Logger::logNoEndl(int type, std::string message, bool color){
+void Logger::logNoEndl(int type, std::string message){
     if (canRewrite) this->finishLine();
 
     std::string output = "";
@@ -65,10 +62,6 @@ void Logger::logNoEndl(int type, std::string message, bool color){
     rewriting = false;
 }
 
-void Logger::logNoEndl(int type, std::string message){
-    this->logNoEndl(type, message, false);
-}
-
 void Logger::logNoEndl(std::string message){
     this->logNoEndl(Logger::LOG_INFO, message);
 }
@@ -98,32 +91,24 @@ bool Logger::clearLine(){
     return true;
 }
 
-bool Logger::logrw(int type, std::string message, bool color){
+bool Logger::logrw(int type, std::string message){
     if (!this->clearLine()) return false;
 
-    this->log(type, message, color);
+    this->log(type, message);
 
     return true;
-}
-
-bool Logger::logrw(int type, std::string message){
-    return this->logrw(type, message, false);
 }
 
 bool Logger::logrw(std::string message){
     return this->logrw(Logger::LOG_INFO, message);
 }
 
-bool Logger::logrwNoEndl(int type, std::string message, bool color){
+bool Logger::logrwNoEndl(int type, std::string message){
     if (!this->clearLine()) return false;
 
-    this->logNoEndl(type, message, color);
+    this->logNoEndl(type, message);
     
     return true;
-}
-
-bool Logger::logrwNoEndl(int type, std::string message){
-    return this->logrwNoEndl(type, message, false);
 }
 
 bool Logger::logrwNoEndl(std::string message){
@@ -147,134 +132,3 @@ void Logger::finishLine(){
     currentLine = "";
 }
 
-std::string operator+(bool a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, bool b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(short a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, short b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(unsigned short a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, unsigned short b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(int a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, int b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(unsigned int a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, unsigned int b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(long a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, long b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(unsigned long a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, unsigned long b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(long long a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, unsigned long long b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(float a, std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, float b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(double a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, double b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(long double a, const std::string& b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
-
-std::string operator+(const std::string& a, long double b){
-    std::stringstream ss;
-    ss << a << b;
-    return ss.str();
-}
