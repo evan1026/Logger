@@ -4,7 +4,7 @@ project(Logger)
 
 set(SOURCE_DIR "src")
 
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
 
 add_library(Logger SHARED ${SOURCE_DIR}/Logger.cpp)
 

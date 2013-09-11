@@ -127,7 +127,6 @@ void Logger::continuelnNoEndl(std::string message){
 }
 
 void Logger::finishLine(){
-    bool color = (currentLine.find("\e") != std::string::npos);
     std::cout << (color ? "\e[m" : "") << std::endl;
     currentLine = "";
 }
