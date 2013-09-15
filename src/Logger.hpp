@@ -70,20 +70,20 @@ struct Logger {
 
     template<class... Ts>
     bool logrw(int type, Ts... parts){
-        this->logrw(type, Logger::makeString(parts...));
+        return this->logrw(type, Logger::makeString(parts...));
     }
     template<class... Ts>
     bool logrw(Ts... parts){
-        this->logrw(Logger::makeString(parts...));
+        return this->logrw(Logger::makeString(parts...));
     }
 
     template<class... Ts>
     bool logrwNoEndl(int type, Ts... parts){
-        this->logrwNoEndl(type, Logger::makeString(parts...));
+        return this->logrwNoEndl(type, Logger::makeString(parts...));
     }
     template<class... Ts>
     bool logrwNoEndl(Ts... parts){
-        this->logrwNoEndl(Logger::makeString(parts...));
+        return this->logrwNoEndl(Logger::makeString(parts...));
     }
 
     template<class... Ts>

@@ -45,7 +45,7 @@ void Logger::logNoEndl(int type, std::string message){
     output += message;
 
     if (rewriting && thisLength < lastLength){
-        for (int i = 0; i < lastLength - thisLength; i++){
+        for (unsigned int i = 0; i < lastLength - thisLength; i++){
             output += " ";
         }
         thisLength = lastLength;
@@ -80,7 +80,7 @@ void Logger::pause(std::string message){
 bool Logger::clearLine(){
     if (!canRewrite) return false;
 
-    for (int i = 0; i < lastLength; i++){
+    for (unsigned int i = 0; i < lastLength; i++){
         std::cout << "\b";
     }
     std::cout.flush();
