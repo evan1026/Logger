@@ -6,16 +6,34 @@
 #include <sstream>
 
 struct Logger {
-    static const int LOG_INFO    = 0;
-    static const int LOG_WARNING = 1;
-    static const int LOG_ERROR   = 2;
 
-    Logger(bool _color);
+    enum LogType {
+        Info,
+        Warning,
+        Error
+    };
+
+    struct Settings {
     
-    void log(int type, std::string message);
+            std::string infoColor,
+                        warningColor,
+                        errorColor;
+
+            Settings();
+            Settings(std::string _infoColor, std::string _warningColor, std::string _errorColor) :
+                    infoColor(_infoColor), warningColor(_warningColor), errorColor(_errorColor) {}
+
+    };
+
+    Settings settings;
+    
+    Logger();
+    Logger(Settings _settings);
+    
+    void log(LogType type, std::string message);
     void log(std::string message);
     
-    void logNoEndl(int type, std::string message);
+    void logNoEndl(LogType type, std::string message);
     void logNoEndl(std::string message);
     
     void pause();
@@ -23,10 +41,10 @@ struct Logger {
 
     bool clearLine();
 
-    bool logrw(int type, std::string message);
+    bool logrw(LogType type, std::string message);
     bool logrw(std::string message);
 
-    bool logrwNoEndl(int type, std::string message);
+    bool logrwNoEndl(LogType type, std::string message);
     bool logrwNoEndl(std::string message);
 
     void continueln(std::string message);
@@ -46,7 +64,7 @@ struct Logger {
     }
     
     template<class... Ts>
-    void log(int type, Ts... parts){
+    void log(LogType type, Ts... parts){
         this->log(type, Logger::makeString(parts...));
     }
     template<class... Ts>
@@ -55,7 +73,7 @@ struct Logger {
     }
     
     template<class... Ts>
-    void logNoEndl(int type, Ts... parts){
+    void logNoEndl(LogType type, Ts... parts){
         this->logNoEndl(type, Logger::makeString(parts...));
     }
     template<class... Ts>
@@ -69,7 +87,7 @@ struct Logger {
     }
 
     template<class... Ts>
-    bool logrw(int type, Ts... parts){
+    bool logrw(LogType type, Ts... parts){
         return this->logrw(type, Logger::makeString(parts...));
     }
     template<class... Ts>
@@ -78,7 +96,7 @@ struct Logger {
     }
 
     template<class... Ts>
-    bool logrwNoEndl(int type, Ts... parts){
+    bool logrwNoEndl(LogType type, Ts... parts){
         return this->logrwNoEndl(type, Logger::makeString(parts...));
     }
     template<class... Ts>
@@ -98,11 +116,23 @@ struct Logger {
     private:
         bool canRewrite;
         bool rewriting;
-        bool color;
         std::size_t lastLength;
         std::string currentLine;
 
         void finishLine();
+
+};
+
+namespace LogColor {
+    static const std::string Black   = "\e[30m";
+    static const std::string Red     = "\e[31m";
+    static const std::string Green   = "\e[32m";
+    static const std::string Yellow  = "\e[33m";
+    static const std::string Blue    = "\e[34m";
+    static const std::string Magenta = "\e[35m";
+    static const std::string Cyan    = "\e[36m";
+    static const std::string White   = "\e[37m";
+ 
 };
 
 #endif

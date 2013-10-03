@@ -24,22 +24,29 @@ then add the library:
 Usage
 =====
 
-Just declare a logger:
+If you're fine with the default settings (info->white, warning->yellow, error->red), just declare a logger:
 
-    Logger logger(bool color); //true if you want unix-style color in the outputs
+    Logger logger;
+
+Otherwise, make your own:
     
-And you have access to its functions:
+    Settings settings = Logger::Settings(<INFO COLOR STRING>, <WARNING COLOR STRING>, <ERROR COLOR STRING>);
+    Logger logger = Logger(settings);
 
-    void log(int type, std::string message);
+For ease, I've put the Linux colors into a namespace called `LogType`. In it, you'll find `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan`, and `White`.
+    
+There are many functions:
+
+    void log(LogType type, std::string message);
     void log(std::string message);
-    void logNoEndl(int type, std::string message);
+    void logNoEndl(LogType type, std::string message);
     void logNoEndl(std::string message);
     void pause();
     void pause(std::string message);
     bool clearLine();
-    bool logrw(int type, std::string message);
+    bool logrw(LogType type, std::string message);
     bool logrw(std::string message);
-    bool logrwNoEndl(int type, std::string message);
+    bool logrwNoEndl(LogType type, std::string message);
     bool logrwNoEndl(std::string message);
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
@@ -60,15 +67,15 @@ Explaination
 
 The string is the message you want to log, the type is one of three types of output:
 
-    Logger::LOG_INFO
-    Logger::LOG_WARNING
-    Logger::LOG_ERROR
+    Logger::LogType::Info
+    Logger::LogType::Warning
+    Logger::LogType::Error
     
-The default type when not given is `LOG_INFO`.
+The default type when not given is `LogInfo`.
 
 The commands ending in `NoEndl` do not add a newline (`\n`) at the end of the line. This allows for the current line to be rewritten using the `rw` varieties. The line can also be cleared with `clearLine()`.
 
-Where applicable, functions returning a boolean return whether or not the command was successful. An error indicates that the command could not be carried out (for instance, when clearing/rewriting a line that had a newline (i.e. clearing/rewriting even though previous command was not a `NoEndl` (p.s. nested parentheses ftw))).
+Where applicable, functions returning a boolean indicate whether or not the command was successful. An error indicates that the command could not be carried out (for instance, when clearing/rewriting a line that had a newline (i.e. clearing/rewriting even though previous command was not a `NoEndl` (p.s. nested parentheses ftw))).
 
 `pause` outputs `Press enter to continue...` (unless another message is supplied) and then waits for the user to press enter before returning and allowing the program to continue.
 
@@ -80,8 +87,8 @@ Example Usage
     #include <Logger/Logger.hpp>
     Logger logger(true);
     logger.log("This is a normal message");
-    logger.log(Logger::LOG_WARNING, "This one is a warning.");
-    logger.log(Logger::LOG_ERROR, "This one is an error.");
+    logger.log(Logger::LogType::Warning, "This one is a warning.");
+    logger.log(Logger::LogType::Error, "This one is an error.");
     logger.pause("Now I'm going to wait until you press enter.");
     logger.logNoEndl("I think this line has a tipo.");
     logger.logrw("I can correct it though."); //Note: if you actually use it to correct typos, you should maybe get your head examined
@@ -89,8 +96,8 @@ Example Usage
     logger.continuelnNoEndl("need to");
     logger.continuelnNoEndl(" do outputs in all one line.");
     logger.log("The level of fun using variatic templates is over ", 9000, "!!!");
-    logger.log(Logger::LOG_WARNING, "The level should always go first!");
-    logger.log("Otherwise it looks like this ->", Logger::LOG_WARNING);
+    logger.log(Logger::LogType::Warning, "The level should always go first!");
+    logger.log("Otherwise it looks like this ->", Logger::LogType::Warning);
     logger.log(Logger::makeString("Logger::makeString will", " make strings ", "for you..."));
     logger.log("But the ", "provided functions ", "are easier and ", "more readable.");
 

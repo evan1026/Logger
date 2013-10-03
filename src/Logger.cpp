@@ -1,13 +1,24 @@
 #include "Logger.hpp"
 
-Logger::Logger(bool _color){
+Logger::Logger() : settings() {
     canRewrite = false;
     rewriting = false;
     lastLength = 0;
-    color = _color;
 }
 
-void Logger::log(int type, std::string message){
+Logger::Logger(Settings _settings) : settings(_settings) {
+    canRewrite = false;
+    rewriting = false;
+    lastLength = 0;
+}
+
+Logger::Settings::Settings(){
+    infoColor = "\e[37m";
+    warningColor = "\e[33m";
+    errorColor = "\e[31m";
+}
+
+void Logger::log(LogType type, std::string message){
     
     this->logNoEndl(type, message);
     this->finishLine();
@@ -16,29 +27,29 @@ void Logger::log(int type, std::string message){
 }
 
 void Logger::log(std::string message){
-    this->log(Logger::LOG_INFO, message);
+    this->log(Logger::LogType::Info, message);
 }
 
-void Logger::logNoEndl(int type, std::string message){
+void Logger::logNoEndl(LogType type, std::string message){
     if (canRewrite) this->finishLine();
 
     std::string output = "";
     std::size_t thisLength = message.length();
     switch (type) {
-        case Logger::LOG_INFO:
-            output += "[INFO] ";
+        case Logger::LogType::Info:
+            output += settings.infoColor + "[INFO] ";
             thisLength += 7;
             break;
-        case Logger::LOG_WARNING:
-            output += (color ? "\e[33m[WARNING] " : "[WARNING] ");
+        case Logger::LogType::Warning:
+            output += settings.warningColor + "[WARNING] ";
             thisLength += 10;
             break;
-        case Logger::LOG_ERROR:
-            output += (color ?  "\e[31m[ERROR] " : "[ERROR] ");
+        case Logger::LogType::Error:
+            output += settings.errorColor + "[ERROR] ";
             thisLength += 8;
             break;
         default:
-            this->log(LOG_ERROR, "Log type not found");
+            this->log(Logger::LogType::Error, "Log type not found");
             break;
     }
 
@@ -63,7 +74,7 @@ void Logger::logNoEndl(int type, std::string message){
 }
 
 void Logger::logNoEndl(std::string message){
-    this->logNoEndl(Logger::LOG_INFO, message);
+    this->logNoEndl(Logger::LogType::Info, message);
 }
 
 void Logger::pause(){
@@ -91,7 +102,7 @@ bool Logger::clearLine(){
     return true;
 }
 
-bool Logger::logrw(int type, std::string message){
+bool Logger::logrw(LogType type, std::string message){
     if (!this->clearLine()) return false;
 
     this->log(type, message);
@@ -100,10 +111,10 @@ bool Logger::logrw(int type, std::string message){
 }
 
 bool Logger::logrw(std::string message){
-    return this->logrw(Logger::LOG_INFO, message);
+    return this->logrw(Logger::LogType::Info, message);
 }
 
-bool Logger::logrwNoEndl(int type, std::string message){
+bool Logger::logrwNoEndl(LogType type, std::string message){
     if (!this->clearLine()) return false;
 
     this->logNoEndl(type, message);
@@ -112,7 +123,7 @@ bool Logger::logrwNoEndl(int type, std::string message){
 }
 
 bool Logger::logrwNoEndl(std::string message){
-    return this->logrwNoEndl(Logger::LOG_INFO, message);
+    return this->logrwNoEndl(Logger::LogType::Info, message);
 }
 
 void Logger::continueln(std::string message){
@@ -127,7 +138,6 @@ void Logger::continuelnNoEndl(std::string message){
 }
 
 void Logger::finishLine(){
-    std::cout << (color ? "\e[m" : "") << std::endl;
+    std::cout << settings.infoColor << std::endl;
     currentLine = "";
 }
-

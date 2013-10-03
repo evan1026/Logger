@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(Logger)
 
 set(SOURCE_DIR "src")
-set(Logger_VERSION_MAJOR 1)
+set(Logger_VERSION_MAJOR 2)
 set(Logger_VERSION_MINOR 0)
 set(Logger_VERSION_PATCH 0)
 
