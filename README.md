@@ -32,6 +32,8 @@ Otherwise, make your own:
     
     Settings settings = Logger::Settings(<INFO COLOR STRING>, <WARNING COLOR STRING>, <ERROR COLOR STRING>);
     Logger logger = Logger(settings);
+    
+If you don't want any colors at all, just use `Logger::Settings("","","")`.
 
 For ease, I've put the Linux colors into a namespace called `LogType`. In it, you'll find `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan`, and `White`.
     
