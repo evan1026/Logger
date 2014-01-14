@@ -35,7 +35,7 @@ Otherwise, make your own:
     
 If you don't want any colors at all, just use `Logger::Settings("","","")`.
 
-For ease, I've put the Linux colors into a namespace called `LogType`. In it, you'll find `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan`, and `White`.
+For ease, I've put the Linux colors into a namespace called `LogColor`. In it, you'll find `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan`, and `White`.
     
 There are many functions:
 
