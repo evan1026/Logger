@@ -14,7 +14,7 @@ struct Logger {
     };
 
     struct Settings {
-    
+
             std::string infoColor,
                         warningColor,
                         errorColor;
@@ -26,16 +26,16 @@ struct Logger {
     };
 
     Settings settings;
-    
+
     Logger();
-    Logger(Settings _settings);
-    
+    explicit Logger(Settings _settings);
+
     void log(LogType type, std::string message);
     void log(std::string message);
-    
+
     void logNoEndl(LogType type, std::string message);
     void logNoEndl(std::string message);
-    
+
     void pause();
     void pause(std::string message);
 
@@ -62,7 +62,7 @@ struct Logger {
         ss << firstPart;
         return ss.str() + makeString(otherParts...);
     }
-    
+
     template<class... Ts>
     void log(LogType type, Ts... parts){
         this->log(type, Logger::makeString(parts...));
@@ -71,7 +71,7 @@ struct Logger {
     void log(Ts... parts){
         this->log(Logger::makeString(parts...));
     }
-    
+
     template<class... Ts>
     void logNoEndl(LogType type, Ts... parts){
         this->logNoEndl(type, Logger::makeString(parts...));
@@ -132,7 +132,7 @@ namespace LogColor {
     static const std::string Magenta = "\e[35m";
     static const std::string Cyan    = "\e[36m";
     static const std::string White   = "\e[37m";
- 
+
 };
 
 #endif

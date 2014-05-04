@@ -19,7 +19,7 @@ Logger::Settings::Settings(){
 }
 
 void Logger::log(LogType type, std::string message){
-    
+
     this->logNoEndl(type, message);
     this->finishLine();
 
@@ -56,7 +56,7 @@ void Logger::logNoEndl(LogType type, std::string message){
     output += message;
 
     if (rewriting && thisLength < lastLength){
-        for (unsigned int i = 0; i < lastLength - thisLength; i++){
+        for (unsigned int i = 0; i < lastLength - thisLength; ++i){
             output += " ";
         }
         thisLength = lastLength;
@@ -91,14 +91,14 @@ void Logger::pause(std::string message){
 bool Logger::clearLine(){
     if (!canRewrite) return false;
 
-    for (unsigned int i = 0; i < lastLength; i++){
+    for (unsigned int i = 0; i < lastLength; ++i){
         std::cout << "\b";
     }
     std::cout.flush();
-    
+
     canRewrite = false;
     rewriting = true;
-    
+
     return true;
 }
 
@@ -118,7 +118,7 @@ bool Logger::logrwNoEndl(LogType type, std::string message){
     if (!this->clearLine()) return false;
 
     this->logNoEndl(type, message);
-    
+
     return true;
 }
 

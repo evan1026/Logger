@@ -5,7 +5,7 @@ project(Logger)
 set(SOURCE_DIR "src")
 set(Logger_VERSION_MAJOR 2)
 set(Logger_VERSION_MINOR 0)
-set(Logger_VERSION_PATCH 0)
+set(Logger_VERSION_PATCH 1)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
 
