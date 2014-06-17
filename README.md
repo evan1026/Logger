@@ -11,6 +11,7 @@ Installation is easy:
     $ make && sudo make install
     
 That will install the necessary files. In order to use, just link up the header and library (/usr/local/include/Logger.hpp and /usr/local/lib/libLogger.so, respectively).
+Note: The file paths only apply to Linux. I have no idea where it will install otherwise, so you'll have to find it yourself.
 
 For CMake, you just need to add the module path:
 
