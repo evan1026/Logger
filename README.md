@@ -10,7 +10,7 @@ Installation is easy:
     $ cmake ..
     $ make && sudo make install
     
-That will install the necessary files. In order to use, just link up the header and library (found /usr/local/include/Logger and /usr/local/lib/libLogger.so, respectively).
+That will install the necessary files. In order to use, just link up the header and library (/usr/local/include/Logger.hpp and /usr/local/lib/libLogger.so, respectively).
 
 For CMake, you just need to add the module path:
 
