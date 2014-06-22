@@ -50,6 +50,9 @@ struct Logger {
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
 
+    std::string getInput();
+    std::string getInput(std::string prompt);
+
     template<class T>
     static std::string makeString(const T& thing){
         std::stringstream ss;
@@ -111,6 +114,11 @@ struct Logger {
     template<class... Ts>
     void continuelnNoEndl(Ts... parts){
         this->continuelnNoEndl(Logger::makeString(parts...));
+    }
+
+    template<class... Ts>
+    std::string getInput(Ts... parts){
+        return this->getInput(Logger::makeString(parts...));
     }
 
     private:

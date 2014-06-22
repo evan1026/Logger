@@ -141,3 +141,18 @@ void Logger::finishLine(){
     std::cout << settings.infoColor << std::endl;
     currentLine = "";
 }
+
+std::string Logger::getInput(){
+    return this->getInput("Please give an input: ");
+}
+
+std::string Logger::getInput(std::string prompt){
+    this->logNoEndl(prompt);
+
+    std::string output;
+    std::getline(std::cin, output);
+
+    canRewrite = false;
+
+    return output;
+}

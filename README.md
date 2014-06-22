@@ -9,7 +9,7 @@ Installation is easy:
     $ cd build
     $ cmake ..
     $ make && sudo make install
-    
+
 That will install the necessary files. In order to use, just link up the header and library (/usr/local/include/Logger.hpp and /usr/local/lib/libLogger.so, respectively).
 Note: The file paths only apply to Linux. I have no idea where it will install otherwise, so you'll have to find it yourself.
 
@@ -30,14 +30,14 @@ If you're fine with the default settings (info->white, warning->yellow, error->r
     Logger logger;
 
 Otherwise, make your own:
-    
+
     Settings settings = Logger::Settings(<INFO COLOR STRING>, <WARNING COLOR STRING>, <ERROR COLOR STRING>);
     Logger logger = Logger(settings);
-    
+
 If you don't want any colors at all, just use `Logger::Settings("","","")`.
 
 For ease, I've put the Linux colors into a namespace called `LogColor`. In it, you'll find `Black`, `Red`, `Green`, `Yellow`, `Blue`, `Magenta`, `Cyan`, and `White`.
-    
+
 There are many functions:
 
     void log(LogType type, std::string message);
@@ -53,14 +53,16 @@ There are many functions:
     bool logrwNoEndl(std::string message);
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
-    
+    std::string getInput();
++   std::string getInput(std::string prompt);
+
 I've also provided a static function `Logger::makeString` that takes in any number of parameters and combines them all into a single string (assumming they all have the `<<` 
 operator defined). Usage is as follows:
 
     logger.log(Logger::makeString(5, " is a number and ", 6 , "is too."));
 
 which prints:
-    
+
     5 is a number and 6 is too.
 
 Each of the functions that takes a message also has a variant that takes a variable number of parameters just like `makeString` (see [Example Usage](#example-usage)).
@@ -73,8 +75,8 @@ The string is the message you want to log, the type is one of three types of out
     Logger::LogType::Info
     Logger::LogType::Warning
     Logger::LogType::Error
-    
-The default type when not given is `LogInfo`.
+
+The default type when not given is `Logger::LogType::Info`.
 
 The commands ending in `NoEndl` do not add a newline (`\n`) at the end of the line. This allows for the current line to be rewritten using the `rw` varieties. The line can also be cleared with `clearLine()`.
 
