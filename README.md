@@ -54,7 +54,7 @@ There are many functions:
     void continueln(std::string message);
     void continuelnNoEndl(std::string message);
     std::string getInput();
-+   std::string getInput(std::string prompt);
+    std::string getInput(std::string prompt);
 
 I've also provided a static function `Logger::makeString` that takes in any number of parameters and combines them all into a single string (assumming they all have the `<<` 
 operator defined). Usage is as follows:
@@ -64,6 +64,8 @@ operator defined). Usage is as follows:
 which prints:
 
     5 is a number and 6 is too.
+    
+Alternatively, you can leave out the call to `Logger::makeString`, and just put the arguments into `Logger::log`, which will call `makeString` for you.
 
 Each of the functions that takes a message also has a variant that takes a variable number of parameters just like `makeString` (see [Example Usage](#example-usage)).
 
