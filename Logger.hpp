@@ -5,6 +5,11 @@
 
 class Logger {
 
+    struct Stream {
+        std::shared_ptr<std::ostream> s;
+        bool c;
+    };
+
     public:
         struct Color {
             static const std::string Black;
@@ -27,51 +32,63 @@ class Logger {
         };
 
     private:
-        std::vector<std::shared_ptr<std::ostream>> outStreams;
+        std::vector<Stream> outStreams;
 
-        void addStreams(std::ostream& o) {
-            outStreams.push_back(std::shared_ptr<std::ostream>(&o, [](std::ostream*){}));
-        }
-
-        template<typename... Streams>
-        void addStreams(std::ostream& o, Streams&... s) {
-            addStreams(o);
-            addStreams(s...);
-        }
-
-        std::string makeString(const Level& l) {
-            std::stringstream ss;
-            ss << l.color << l.prefix;
-            return ss.str();
+        void makeString(std::stringstream& ss, const Level& l) {
+            ss << l.prefix;
         }
 
         template <typename T>
-        std::string makeString(const T& t) {
-            std::stringstream ss;
+        void makeString(std::stringstream& ss, const T& t) {
             ss << t;
-            return ss.str();
         }
 
         template <typename T, typename... Ts>
-        std::string makeString(const T& t, const Ts&... ts) {
-            return makeString(t) + makeString(ts...);
+        void makeString(std::stringstream& ss, const T& t, const Ts&... ts) {
+            makeString(ss, t);
+            makeString(ss, ts...);
+        }
+
+        template <typename... Ts>
+        std::string makeString(const Ts&... ts) {
+            std::stringstream ss;
+            makeString(ss, ts...);
+            return ss.str();
         }
 
     public:
-        template <typename... Streams>
-        Logger(Streams&... s) {
-            addStreams(s...);
+        Logger(std::ostream& o, bool color) {
+            addStream(o, color);
         }
-        Logger() : Logger(std::cout) {}
+        Logger() : Logger(std::cout, true) {}
         ~Logger() {
             print(Color::NoColor);
+        }
+
+        void addStream(std::ostream& o, bool color) {
+            Stream s;
+            s.s = std::shared_ptr<std::ostream>(&o, [](std::ostream*){});
+            s.c = color;
+
+            outStreams.push_back(s);
+        }
+
+        template <typename... Args>
+        void print(const Level& l, const Args&... args) {
+            std::string line = makeString(l, args...);
+            for (auto _stream : outStreams) {
+                if (_stream.c) {
+                    *_stream.s << l.color;
+                }
+                *_stream.s << line;
+            }
         }
 
         template <typename... Args>
         void print(const Args&... args) {
             std::string line = makeString(args...);
             for (auto _stream : outStreams) {
-                *_stream << line;
+                *_stream.s << line;
             }
         }
 
@@ -79,7 +96,7 @@ class Logger {
         void println(const Args&... args) {
             print(args...);
             for (auto _stream : outStreams) {
-                *_stream << std::endl;
+                *_stream.s << std::endl;
             }
         }
 
