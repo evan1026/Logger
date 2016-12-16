@@ -6,7 +6,7 @@
 #include "Logger.hpp"
 
 int main() {
-    Logger log;
+    Logger::Logger log;
 
     std::ofstream test("test.txt");
     log.addStream(test, false);
