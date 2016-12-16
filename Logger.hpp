@@ -1,3 +1,6 @@
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -139,3 +142,5 @@ const std::string Logger::Color::NoColor  = "\e[0m";
 Logger::Level Logger::Level::Info   ("[INFO]  ", Logger::Color::NoColor);
 Logger::Level Logger::Level::Warning("[WARN]  ", Logger::Color::Yellow);
 Logger::Level Logger::Level::Error  ("[ERROR] ", Logger::Color::Red);
+
+#endif
