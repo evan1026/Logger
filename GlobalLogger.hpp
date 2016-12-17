@@ -9,3 +9,5 @@
 namespace Logger {
     Logger globalLogger;
 }
+
+#endif
