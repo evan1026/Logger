@@ -7,7 +7,7 @@
 // Include it in all the files you need and they'll share a logger
 
 namespace Logger {
-    Logger globalLogger;
+    extern Logger globalLogger;
 }
 
 #endif

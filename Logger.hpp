@@ -26,9 +26,9 @@ namespace Logger {
     };
 
     namespace Levels {
-        static Logger::Level Info   ("[INFO]  ", Logger::Color::NoColor);
-        static Logger::Level Warning("[WARN]  ", Logger::Color::Yellow);
-        static Logger::Level Error  ("[ERROR] ", Logger::Color::Red);
+        extern Logger::Level Info;
+        extern Logger::Level Warning;
+        extern Logger::Level Error;
     };
 
     class Logger {
