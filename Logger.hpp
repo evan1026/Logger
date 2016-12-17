@@ -68,9 +68,6 @@ namespace Logger {
                 addStream(o, color);
             }
             Logger() : Logger(std::cout, true) {}
-            ~Logger() {
-                print(Color::NoColor);
-            }
 
             void addStream(std::ostream& o, bool color) {
                 Stream s;
@@ -104,6 +101,9 @@ namespace Logger {
                 print(args...);
                 for (auto _stream : outStreams) {
                     *_stream.s << std::endl;
+                    if (_stream.c) {
+                        *_stream.s << Color::NoColor;
+                    }
                 }
             }
 
