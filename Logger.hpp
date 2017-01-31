@@ -1,6 +1,10 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
+#if defined(linux) || defined(__linux) || defined(__linux__) || defined(Macintosh) || defined(macintosh) || (defined(__APPLE__) && defined(__MACH__))
+    #define COLOR_SUPPORT
+#endif
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -9,15 +13,27 @@
 namespace Logger {
 
     namespace Color {
-        const std::string Black   = "\e[30m";
-        const std::string Red     = "\e[31m";
-        const std::string Green   = "\e[32m";
-        const std::string Yellow  = "\e[33m";
-        const std::string Blue    = "\e[34m";
-        const std::string Magenta = "\e[35m";
-        const std::string Cyan    = "\e[36m";
-        const std::string White   = "\e[37m";
-        const std::string NoColor = "\e[0m";
+        #ifdef COLOR_SUPPORT
+            const std::string Black   = "\e[30m";
+            const std::string Red     = "\e[31m";
+            const std::string Green   = "\e[32m";
+            const std::string Yellow  = "\e[33m";
+            const std::string Blue    = "\e[34m";
+            const std::string Magenta = "\e[35m";
+            const std::string Cyan    = "\e[36m";
+            const std::string White   = "\e[37m";
+            const std::string NoColor = "\e[0m";
+        #else
+            const std::string Black   = "";
+            const std::string Red     = "";
+            const std::string Green   = "";
+            const std::string Yellow  = "";
+            const std::string Blue    = "";
+            const std::string Magenta = "";
+            const std::string Cyan    = "";
+            const std::string White   = "";
+            const std::string NoColor = "";
+        #endif
     };
 
     struct Level {
