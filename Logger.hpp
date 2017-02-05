@@ -175,8 +175,8 @@ namespace Logger {
              * Example usage:
              * logger.print(Levels::Info, "These ", "will ", "be ", "one ", "message.");
              *
-             * \p l - Level to use for this line
-             * \p args - Stuff to print
+             * \p l - Level to use for this line    <br>
+             * \p args - Stuff to print             <br>
              */
             template <typename... Args>
             void print(const Level& l, const Args&... args) {

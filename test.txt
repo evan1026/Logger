@@ -1,8 +1,0 @@
-[INFO]  Hello world!
-[INFO]  Here's some info
-[WARN]  Here's a warning
-[ERROR] Here's an error
-[INFO]  Here's some info with 1 number in it
-[WARN]  Here's a warning with some extra info
-[ERROR] Here's an error split in two
-You can write raw stuff too if you want.[INFO]  But be careful because it could get messy
