@@ -65,3 +65,9 @@ Lastly, for the sake of convenience, I've created a global logger object. It can
 obtained in the header `GlobalLogger.hpp`, and is called `Logger::globalLogger`.
 This way, you can just have one global logger across the entire project without
 having to worry about reinstantiation across multiple files.
+
+Example
+=======
+
+Here is what is printed by the code in `test.cpp`:
+![Output](https://i.imgur.com/QWElbiu.png)
