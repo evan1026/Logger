@@ -1,0 +1,13 @@
+[INFO]  This is info log
+[WARN]  This is warning log
+[ERROR] This is error log
+[INFO]  This info has 5 parts.
+[WARN]  This warning has 5 parts.
+[ERROR] This error has 5 parts.
+This is a raw println
+This is a raw println with 3 parts.
+[ERROR] This is a println with a level before it
+[Custom] This is a println with a custom level.
+This is a raw print with a newline added by me
+This is a raw print with 3 parts and a newline
+[Custom] This is a raw print with a custom level and a newline

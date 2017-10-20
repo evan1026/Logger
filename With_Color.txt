@@ -1,0 +1,13 @@
+[0m[INFO]  This is info log
+[0m[33m[WARN]  This is warning log
+[0m[31m[ERROR] This is error log
+[0m[0m[INFO]  This info has 5 parts.
+[0m[33m[WARN]  This warning has 5 parts.
+[0m[31m[ERROR] This error has 5 parts.
+[0mThis is a raw println
+[0mThis is a raw println with 3 parts.
+[0m[31m[ERROR] This is a println with a level before it
+[0m[32m[Custom] This is a println with a custom level.
+[0mThis is a raw print with a newline added by me
+This is a raw print with 3 parts and a newline
+[32m[Custom] This is a raw print with a custom level and a newline

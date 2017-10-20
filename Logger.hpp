@@ -234,11 +234,11 @@ namespace Logger {
 
             /*! \callergraph
              *
-             * Same as log()
+             * Alias for log()
              */
             template <typename... Args>
             void info(const Args&... args) {
-                println(Levels::Info, args...);
+                log(args...);
             }
 
             /*! \callergraph
@@ -252,11 +252,11 @@ namespace Logger {
 
             /*! \callergraph
              *
-             * Same as warn()
+             * Alias for warn()
              */
             template <typename... Args>
             void warning(const Args&... args) {
-                println(Levels::Warning, args...);
+                warn(args...);
             }
 
             /*! \callergraph
